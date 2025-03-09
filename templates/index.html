@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Marketing Copy Generator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>AI Marketing Copy Generator</h1>
+      <form method="POST">
+        <label for="brand">Brand Name:</label>
+        <input type="text" name="brand" required /><br />
+
+        <label for="product_description">Product/Service Description:</label>
+        <input type="text" name="product_description" required /><br />
+
+        <label for="audience">Target Audience:</label>
+        <input type="text" name="audience" required /><br />
+
+        <label>Choose Tone:</label>
+        <div class="tone-buttons">
+          <button
+            type="button"
+            class="tone-button"
+            onclick="selectTone('Exciting')"
+          >
+            Exciting
+          </button>
+          <button
+            type="button"
+            class="tone-button"
+            onclick="selectTone('Professional')"
+          >
+            Professional
+          </button>
+          <button
+            type="button"
+            class="tone-button"
+            onclick="selectTone('Casual')"
+          >
+            Casual
+          </button>
+          <button
+            type="button"
+            class="tone-button"
+            onclick="selectTone('Friendly')"
+          >
+            Friendly
+          </button>
+        </div>
+
+        <input type="hidden" name="tone" id="tone" value="Exciting" />
+
+        <button type="submit" class="submit-button">Generate Copy</button>
+      </form>
+
+      {% if generated_copy %}
+      <h2>Generated Marketing Copy:</h2>
+      <p class="generated-text">{{ generated_copy }}</p>
+      {% endif %}
+    </div>
+
+    <script>
+      function selectTone(tone) {
+        document.getElementById("tone").value = tone;
+        let buttons = document.querySelectorAll(".tone-button");
+        buttons.forEach((btn) => btn.classList.remove("selected"));
+        event.target.classList.add("selected");
+      }
+    </script>
+  </body>
+</html>
